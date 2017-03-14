@@ -1,24 +1,52 @@
 import React from 'react';
 
 import Pop from './pages/pop';
+import RenderItems from './pages/renderItems';
 
 const urlAddress = [
     {
+        showPop: false,
         url: ''
     }
 ];
-export default class App extends React.Component{
+export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             urlAddress
         }
     }
+   
+    handleSubmit(url) {
+        this.state.urlAddress.push({ url, showPop: true });
+        this.setState({ urlAddress: this.state.urlAddress });
+        console.log(url);
+    }
+    
+    
+    toggleUrl(url) {
+        const foundUrl = _.find(this.state.urlAddress, todo =>
+            todo.url === url);
+        foundUrl.showPop = !foundUrl.showPop;
+        this.setState({ urlAddress: this.state.urlAddress });
+    }
+    
+   
+    
     render() {
         return (
             <div>
-                <Pop urlAddress={this.state.urlAddress}/>
+                <div>
+                    <Pop
+                        urlAddress={this.state.urlAddress}    
+                        handleSubmit={this.handleSubmit.bind(this)} />
                 </div>
+                <div>
+                    <RenderItems
+                        urlAddress={this.state.urlAddress}
+                        toggleUrl={this.toggleUrl.bind(this)}/>
+                </div>
+            </div>
         )
     }
 }

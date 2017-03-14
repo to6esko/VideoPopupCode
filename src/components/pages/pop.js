@@ -1,9 +1,6 @@
 import React from 'react';
 
-
-
-
-export default class Pop extends React.Component{
+export default class Pop extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,10 +17,7 @@ export default class Pop extends React.Component{
         }
     }
 
-    handleSubmit(url) {
-        this.state.urlAddress.push(url);
-        this.setState({ urlAddress: this.state.urlAddress });
-    }
+    
     handlePopClick() {
         this.setState(prevState => ({
             showPop: !prevState.showPop
@@ -34,21 +28,24 @@ export default class Pop extends React.Component{
             showEnter: !prevState.showEnter
         }));
     }
+    
     getUrl(event) {
         event.preventDefault();
         let urlValue = this.refs.urlValue;
         let value = urlValue.value;
-        this.handleSubmit(value);
+        this.props.handleSubmit(value);
         this.refs.urlValue.value = "";
     }
+    
+    
     closeButton() {
         const showEnter = this.state.showEnter;
         if (!showEnter) {
             return null;
         } else {
             return (
-                <div onClick={this.handleEnterClick.bind(this)}>
-                    <button onClick={this.getUrl.bind(this)} className="pop-btn">Enter</button>
+                <div onClick={this.handleEnterClick.bind(this)} >
+                        <button onClick={this.getUrl.bind(this)} className="pop-btn">Enter</button>
                 </div>
             )
         }
@@ -61,14 +58,14 @@ export default class Pop extends React.Component{
         } else {
             return (
                 <div>
-                    <div className="pop">
-                        <form className="pop-form" onSubmit={this.handleSubmit.bind(this)}>
+                    <div className="pop" >
+                        <form className="pop-form">
                             <div onChange={this.validateInput.bind(this)}>
-                                <input ref="urlValue" onPaste={this.handleEnterClick.bind(this)} type="text" className="pop-input" placeholder="Enter your You Tube address..." />
+                                <input value={this.props.value} onPaste={this.handleEnterClick.bind(this)} ref="urlValue" type="text" className="pop-input" placeholder="Enter your You Tube address..." />
                             </div>
                             <div onClick={this.handlePopClick.bind(this)}>
                                 {this.closeButton()}
-                            </div>
+                            </div>   
                         </form>
                     </div>
                 </div>
@@ -78,9 +75,9 @@ export default class Pop extends React.Component{
 
     render() {
         return (
-        <div>
+            <div>
                 {this.enterButton()}
-            </div>    
+            </div>
         )
     }
 }
