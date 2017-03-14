@@ -1,17 +1,19 @@
 import React from 'react';
+import HeaderComments from './headerComments';
+
 
 export default class NavVideo extends React.Component {
     constructor(props) {
         super(props);
-        this.state={showPage:false}
-   }
-    
+        this.state = { deleteVideo: false }
+    }
+
     addUrl(props) {
         //let urls = this.props.urlAddress;
-        const { url} = this.props;
-       //const {url} = this.props;
-       console.log(url);
-       
+        const { url } = this.props;
+        //const {url} = this.props;
+        console.log(url);
+
         let rexg = /(([a-zA-Z0-9\-_])+$)(?:&feature=related)?(?:[\w\-]{0})?/g
         let matches = url.match(rexg);
 
@@ -27,9 +29,30 @@ export default class NavVideo extends React.Component {
                 </div>
             )
         }
-    }    
+    }
+
+    handleDeleteClick() {
+        this.setState(prevState => ({
+            deleteVideo: !prevState.deleteVideo,
+            deleteVideo: true
+        }));
+    }
+    addImg() {
+        const deleteVideo = this.state.deleteVideo;
+        const { showPop } = this.props;
+        if (!deleteVideo && !showPop) {
+            return null;
+        } else {
+            return (
+
+                <div className="video" >
+                    <img src='img/video.jpg' alt="video" />
+                </div>
+            )
+        }
+    }
     showPage(props) {
-        const {showPop} = this.props;
+        const { showPop } = this.props;
         if (!showPop) {
             return null;
         } else {
@@ -41,21 +64,22 @@ export default class NavVideo extends React.Component {
                         </div>
                         <div>
                             {this.addUrl()}
+                            {this.addImg()}
                             {/*<NavVideo />*/}
                             <div className="btn">
                                 <div className="btn-right">
                                     <ul>
                                         <li><img src="img/btn-edit.jpg" alt="edit" /></li>
 
-                                        <div>
-                                            <li><img src="img/btn-delete.jpg" alt="delete" /></li>
+                                        <div onClick={this.handleDeleteClick.bind(this)}>
+                                            <li><img onClick={this.props.deleteUrlAddress.bind(this, this.props.url)} src="img/btn-delete.jpg" alt="delete" /></li>
                                         </div>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            {/*<RenderItemsNav />*/}
+                            <HeaderComments />
                         </div>
                     </div>
                 </div>

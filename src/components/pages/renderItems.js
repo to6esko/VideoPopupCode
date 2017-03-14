@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import NavVideo from './navVideo';
 
+
 export default class RenderItems extends React.Component{
     
     renderItems() {
@@ -10,11 +11,10 @@ export default class RenderItems extends React.Component{
         return _.map(this.props.urlAddress, (todo, i) =>
             <div key={i}>    
                 <NavVideo  {...todo} {...props} />
-                
             </div>    
         )
     }
-        
+
     render() {
         return (
             <div>
