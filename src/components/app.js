@@ -51,8 +51,6 @@ export default class App extends React.Component {
                         toggleUrl={this.toggleUrl.bind(this)}
                         deleteUrlAddress={this.deleteUrlAddress.bind(this)}
                     />
-                    
-
                 </div>
                 
             </div>
