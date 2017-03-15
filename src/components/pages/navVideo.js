@@ -19,8 +19,8 @@ export default class NavVideo extends React.Component {
 
         let newUrl = "https://www.youtube.com/embed/" + matches;
         console.log('newUrl: ' + newUrl);
-        const { showPop } = this.props;
-        if (!showPop) {
+        const deleteVideo = this.state.deleteVideo;
+        if (deleteVideo) {
             return null;
         } else {
             return (
@@ -39,12 +39,10 @@ export default class NavVideo extends React.Component {
     }
     addImg() {
         const deleteVideo = this.state.deleteVideo;
-        const { showPop } = this.props;
-        if (!deleteVideo && !showPop) {
+        if (!deleteVideo) {
             return null;
         } else {
             return (
-
                 <div className="video" >
                     <img src='img/video.jpg' alt="video" />
                 </div>
@@ -70,10 +68,7 @@ export default class NavVideo extends React.Component {
                                 <div className="btn-right">
                                     <ul>
                                         <li><img src="img/btn-edit.jpg" alt="edit" /></li>
-
-                                        <div onClick={this.handleDeleteClick.bind(this)}>
-                                            <li><img onClick={this.props.deleteUrlAddress.bind(this, this.props.url)} src="img/btn-delete.jpg" alt="delete" /></li>
-                                        </div>
+                                        <li><img onClick={this.handleDeleteClick.bind(this)} src="img/btn-delete.jpg" alt="delete" /></li>
                                     </ul>
                                 </div>
                             </div>

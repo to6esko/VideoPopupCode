@@ -5,7 +5,6 @@ import RenderItems from './pages/renderItems';
 
 const urlAddress = [
     {
-        showPop: false,
         url: ''
     }
 ];
@@ -14,6 +13,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            showPop: false,
             urlAddress
         }
     }
@@ -28,7 +28,6 @@ export default class App extends React.Component {
     toggleUrl(url) {
         const foundUrl = _.find(this.state.urlAddress, todo =>
             todo.url === url);
-        foundUrl.showPop = !foundUrl.showPop;
         this.setState({ urlAddress: this.state.urlAddress });
     }
 
@@ -37,7 +36,7 @@ export default class App extends React.Component {
             todo.id === id);
         this.setState({ urlAddress: this.state.urlAddress });
     }
-
+    
     render() {
         return (
             <div>
